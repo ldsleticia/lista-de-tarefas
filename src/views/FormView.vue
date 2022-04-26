@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Form",
 
@@ -51,28 +50,31 @@ export default {
     };
   },
   created() {
-    if(this.$route.params.index === 0 || this.$route.params.index !== undefined) {
+    if (
+      this.$route.params.index === 0 ||
+      this.$route.params.index !== undefined
+    ) {
       this.methodSave = "update";
-      let tasks = JSON.parse(localStorage.getItem("tasks"))
-      this.form = tasks[this.$route.params.index]
+      let tasks = JSON.parse(localStorage.getItem("tasks"));
+      this.form = tasks[this.$route.params.index];
     }
   },
   methods: {
     saveTask() {
-      if(this.methodSave === "update"){
+      if (this.methodSave === "update") {
         let tasks = JSON.parse(localStorage.getItem("tasks"));
         tasks[this.$route.params.index] = this.form;
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        this.$router.push({ name: "list" })
+        this.$router.push({ name: "list" });
         return;
       }
 
       let tasks = localStorage.getItem("tasks")
         ? JSON.parse(localStorage.getItem("tasks"))
         : [];
-        tasks.push(this.form);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        this.$router.push({name: "list"})
+      tasks.push(this.form);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      this.$router.push({ name: "list" });
     },
   },
 };
